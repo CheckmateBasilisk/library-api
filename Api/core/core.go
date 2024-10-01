@@ -19,7 +19,7 @@ import (
 // functionality... business logic!
 //  also deal with exceptions and failures
 func makeLoan(user *User, book *Book, start time.Time, end time.Time) Loan {
-    id := "laliullelo" // think about this...
+    id := "laliulelo" // think about this...
     return Loan{id, book, user, start, end, time.Time{}}// end time == zero
 }
 

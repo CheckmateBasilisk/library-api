@@ -5,7 +5,8 @@ import (
 )
 
 type User struct {
-    id string
-    name string
-    birthday time.Time //ignore anything other than dd/mm/yyyy
+    Id string
+    Name string
+    //birthday time.Time //ignore anything other than dd/mm/yyyy
+    Birthday string//FIXME: this shoulnt be string
 }

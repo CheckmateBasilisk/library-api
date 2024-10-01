@@ -5,11 +5,15 @@ import (
 )
 
 type Loan struct {
-    id string
-    book *Book
-    user *User
-    loanStart time.Time
-    loanEnd time.Time
-    returnDate time.Time //accounts for late returns
+    Id string
+    Book *Book
+    User *User
+    //FIXME: change from string to time
+    LoanStart string
+    LoanEnd string
+    ReturnDate string
+    //LoanStart time.Time
+    //LoanEnd time.Time
+    //ReturnDate time.Time //accounts for late returns
     // a status makes sense?
 }
