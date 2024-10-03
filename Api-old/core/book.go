@@ -1,12 +1,12 @@
 package core
 
 type Book struct {
-    id string // this is a leakage from the db concepts all the way through the API... dont know if there's a fix
-    name string
-    isbn string
-    author string
-    year int //FIXME: does it make sense to use time? idk...
-    synopsis string
+    Id string // this is a leakage from the db concepts all the way through the API... dont know if there's a fix
+    Isbn string
+    Name string
+    Author string
+    Year int //FIXME: does it make sense to use time? idk...
+    Synopsis string
 }
 
 // FIXME: is this needed? probably not since I can instantiante structs with Name{fields...}

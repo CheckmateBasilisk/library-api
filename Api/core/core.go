@@ -1,25 +1,50 @@
 package core
 
 import (
-    "time"
-    //"github.com/CheckmateBasilisk/library-api/db"
-    //"github.com/CheckmateBasilisk/library-api/server"
+	"fmt"
+	"net/http"
+    "context"
+
+	//"github.com/CheckmateBasilisk/library-api/routes"
+
+    //FIXME: the goal is to make core unaware of the innards of server/router creation, it just has to run ListenAndServe
+    //  is it possible??
 )
-// User <-> API <-> core + datatypes <-> db <-> actual db
-// User>api>core>db>core [compute]>api>User
-// core has access to datatypes. Api and db deal in strings only
-// core has business logic to manipulate datatypes
-// whats the difference between mvc and this?
-//  I think this way the project is vertical instead of horizontal ?
-//  each type is not spread through all layers, like in MVC ???
 
-// core represents "actions", verbs. Loaning a book is here, but Book and User are somewhere else...
-//  this way, core has FUNCIONAILITIES... should functionalities be in other .go files in this package and core just orchestrate them?
-
-// functionality... business logic!
-//  also deal with exceptions and failures
-func makeLoan(user *User, book *Book, start time.Time, end time.Time) Loan {
-    id := "laliulelo" // think about this...
-    return Loan{id, book, user, start, end, time.Time{}}// end time == zero
+type Core struct {
+    // port, baseUrl, database details, router...
+    // FIXME: should this have substructs? idk... ill find out eventually
+    // server + routes and handlers
+    baseUrl string
+    port int
+    router http.Handler
+    // database
 }
 
+//instantiate new core
+// fill it with config (injecting deps)
+//func NewCore(router http.Handler) *Core { //FIXME: move the router creation to routes.go and inject it through main during core creation
+func NewCore(baseUrl string, port int, router http.Handler) *Core {
+    core := &Core{
+        baseUrl: baseUrl,
+        port: port,
+        router: router,
+        //FIXME: remove the route loading from here, defer it to main?
+        //      anyways, routes.go should be able to create the router and this should get it from there, not create it by itself -> remove loadRoutes?
+        //router: routes // plugs the router defined @/routes/routes.go here
+    }
+    return core
+}
+
+func (core *Core) Run(ctx context.Context) error {
+    server := &http.Server{
+        Addr: fmt.Sprintf(":%d", core.port),
+        Handler: core.router,
+    }
+
+    err := server.ListenAndServe()
+    if err != nil {
+        return fmt.Errorf("error serving %w", err)
+    }
+    return nil // if everything is ok
+}

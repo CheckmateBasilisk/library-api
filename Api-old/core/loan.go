@@ -1,7 +1,7 @@
 package core
 
 import (
-    "time"
+    //"time"
 )
 
 type Loan struct {
@@ -12,8 +12,8 @@ type Loan struct {
     LoanStart string
     LoanEnd string
     ReturnDate string
-    //LoanStart time.Time
-    //LoanEnd time.Time
-    //ReturnDate time.Time //accounts for late returns
+    //loanStart time.Time
+    //loanEnd time.Time
+    //returnDate time.Time //accounts for late returns
     // a status makes sense?
 }
