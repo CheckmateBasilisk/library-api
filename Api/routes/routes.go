@@ -6,7 +6,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 
-    "github.com/CheckmateBasilisk/library-api/handlers"
+    "github.com/CheckmateBasilisk/library-api/routes/handlers"
 )
 
 // contains all routes and calls the handlers
